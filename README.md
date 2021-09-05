@@ -1,1 +1,1 @@
-# MLOps_clean-code-principles
+# MLOps_scalable-ml-pipeline
