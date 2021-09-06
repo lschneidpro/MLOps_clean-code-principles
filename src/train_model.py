@@ -62,7 +62,7 @@ if __name__ == "main":
         encoder = encoder, lb=lb
     )
     # Train and save a model.
-    model = train_model(X_train, y_train)
+    model = train_model(X_train, y_train, hp=True)
     
     dump(model, '../model/model.joblib')
     dump(encoder, '../model/encoder.joblib')

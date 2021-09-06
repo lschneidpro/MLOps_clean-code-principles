@@ -58,7 +58,7 @@ def train_model(X_train, y_train, hp = False):
         return optimal_model
     else:
         
-        parameters = {'n_estimators': 300, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto', 'max_depth': 60, 'criterion': 'gini', 'bootstrap': False}
+        parameters = {'n_estimators': 300, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': 100, 'criterion': 'gini', 'bootstrap': False}
         model.set_params(**parameters)
         model.fit(X_train, y_train)
         
