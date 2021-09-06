@@ -37,11 +37,13 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
-    - name: DVC
+    - name: Install DVC
       uses: iterative/setup-dvc@v1
-    - name: Test with pytest
+    - name: Configure DVC
       run: |
         dvc remote add s3remote s3://bucket-dvc-lschneid
         dvc remote default s3remote
         dvc pull
+    - name: Test with pytest
+      run: |
         pytest
