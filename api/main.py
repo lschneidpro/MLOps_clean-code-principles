@@ -1,9 +1,11 @@
 # Put the code for your API here.
 
 from joblib import load
+import os
 from typing import Dict
+from sys import exit
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 import pandas as pd
 
 from api.schemas import PredictPayload
@@ -21,8 +23,13 @@ cat_features = [
     "native-country",
 ]
 
-
-app = FastAPI(debug=True)
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+    
+app = FastAPI()
 
 @app.on_event("startup")
 def load_artifacts():
