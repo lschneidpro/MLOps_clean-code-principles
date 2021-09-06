@@ -41,8 +41,6 @@ jobs:
       uses: iterative/setup-dvc@v1
     - name: Configure DVC
       run: |
-        dvc remote add s3remote s3://bucket-dvc-lschneid
-        dvc remote default s3remote
         dvc pull
     - name: Test with pytest
       run: |
