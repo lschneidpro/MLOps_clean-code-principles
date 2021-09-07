@@ -8,7 +8,7 @@ Some unit tests have been created to monitor the model performance on various sl
 Finally, the dataset and model are updated are tracked with git and DVC.
 
 ## Request to the API
-An example of request is provided here:
+An example of querying the api is provided here:
 ```python
 import requests
 
