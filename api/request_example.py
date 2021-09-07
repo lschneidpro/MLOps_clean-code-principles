@@ -24,4 +24,3 @@ data = response.json()
 
 print(status_code)
 print(data)
-

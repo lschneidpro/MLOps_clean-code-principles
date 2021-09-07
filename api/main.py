@@ -50,19 +50,7 @@ async def say_hello():
 @app.post("/predict")
 async def predict(payload: PredictPayload) -> Dict:
 
-    data = pd.DataFrame(
-        {
-            "workclass": payload.workclass.value,
-            "education": payload.education.value,
-            "marital-status": payload.marital_status.value,
-            "occupation": payload.occupation.value,
-            "relationship": payload.relationship.value,
-            "race": payload.race.value,
-            "sex": payload.sex.value,
-            "native-country": payload.native_country.value,
-        },
-        index=[0],
-    )
+    data = pd.DataFrame(payload.dict(by_alias=True), index=[0])
     X, _, _, _ = process_data(
         data,
         categorical_features=cat_features,

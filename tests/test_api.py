@@ -18,7 +18,7 @@ def test_root():
         assert response.json() == {"greeting": "Hello World!"}
 
 
-def test_prediction_good_payload():
+def test_prediction_negative_prediction():
     with TestClient(app) as client:
         response = client.post(
             "/predict",
@@ -36,6 +36,26 @@ def test_prediction_good_payload():
 
         assert response.status_code == 200
         assert response.json() == {"prediction": {"salary": "<=50K"}}
+
+
+def test_prediction_positive_prediction():
+    with TestClient(app) as client:
+        response = client.post(
+            "/predict",
+            json={
+                "workclass": "Private",
+                "education": "Masters",
+                "marital-status": "Married-civ-spouse",
+                "occupation": "Exec-managerial",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "native-country": "United-States",
+            },
+        )
+
+        assert response.status_code == 200
+        assert response.json() == {"prediction": {"salary": ">50K"}}
 
 
 def test_prediction_bad_payload():
