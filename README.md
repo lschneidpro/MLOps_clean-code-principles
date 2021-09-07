@@ -4,6 +4,7 @@ Project from the ML DevOps Engineer Nanodegree of Udacity
 
 ## Project Description
 This is a project to develop a classification model on publicly available Census Bureau data. 
+The model is described in a model card.
 Some unit tests have been created to monitor the model performance on various slices of the data. The model is deployed to Heroku using the FastAPI package and tested through API tests. Both the slice-validation and the API tests are incorporated into a CI/CD framework using GitHub Actions.
 Finally, the dataset and model are updated are tracked with git and DVC.
 
