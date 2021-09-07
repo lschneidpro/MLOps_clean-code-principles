@@ -15,7 +15,7 @@ def test_root():
     with TestClient(app) as client:
         response = client.get("/")
         assert response.status_code == 200
-        assert response.json == {'greeting': 'Hello World!'}
+        assert response.json == {"greeting": "Hello World!"}
 
 
 def test_prediction_good_payload():
@@ -56,15 +56,58 @@ def test_prediction_bad_payload():
         )
 
         assert response.status_code == 422
-        assert response.json() == {'detail': [{'loc': ['body', 'workclass'],
-           'msg': "value is not a valid enumeration member; permitted: 'State-gov', 'Self-emp-not-inc', 'Private', 'Federal-gov', 'Local-gov', '?', 'Self-emp-inc', 'Without-pay', 'Never-worked'",
-           'type': 'type_error.enum',
-           'ctx': {'enum_values': ['State-gov',
-             'Self-emp-not-inc',
-             'Private',
-             'Federal-gov',
-             'Local-gov',
-             '?',
-             'Self-emp-inc',
-             'Without-pay',
-             'Never-worked']}}]}
+        assert response.json() == {
+            "detail": [
+                {
+                    "loc": ["body", "native-country"],
+                    "msg": "value is not a valid enumeration member; permitted: 'United-States', 'Cuba', 'Jamaica', 'India', '?', 'Mexico', 'South', 'Puerto-Rico', 'Honduras', 'England', 'Canada', 'Germany', 'Iran', 'Philippines', 'Italy', 'Poland', 'Columbia', 'Cambodia', 'Thailand', 'Ecuador', 'Laos', 'Taiwan', 'Haiti', 'Portugal', 'Dominican-Republic', 'El-Salvador', 'France', 'Guatemala', 'China', 'Japan', 'Yugoslavia', 'Peru', 'Outlying-US(Guam-USVI-etc)', 'Scotland', 'Trinadad&Tobago', 'Greece', 'Nicaragua', 'Vietnam', 'Hong', 'Ireland', 'Hungary', 'Holand-Netherlands'",
+                    "type": "type_error.enum",
+                    "ctx": {
+                        "enum_values": [
+                            "United-States",
+                            "Cuba",
+                            "Jamaica",
+                            "India",
+                            "?",
+                            "Mexico",
+                            "South",
+                            "Puerto-Rico",
+                            "Honduras",
+                            "England",
+                            "Canada",
+                            "Germany",
+                            "Iran",
+                            "Philippines",
+                            "Italy",
+                            "Poland",
+                            "Columbia",
+                            "Cambodia",
+                            "Thailand",
+                            "Ecuador",
+                            "Laos",
+                            "Taiwan",
+                            "Haiti",
+                            "Portugal",
+                            "Dominican-Republic",
+                            "El-Salvador",
+                            "France",
+                            "Guatemala",
+                            "China",
+                            "Japan",
+                            "Yugoslavia",
+                            "Peru",
+                            "Outlying-US(Guam-USVI-etc)",
+                            "Scotland",
+                            "Trinadad&Tobago",
+                            "Greece",
+                            "Nicaragua",
+                            "Vietnam",
+                            "Hong",
+                            "Ireland",
+                            "Hungary",
+                            "Holand-Netherlands",
+                        ]
+                    },
+                }
+            ]
+        }
