@@ -15,7 +15,7 @@ def test_root():
     with TestClient(app) as client:
         response = client.get("/")
         assert response.status_code == 200
-        assert response.json == {"greeting": "Hello World!"}
+        assert response.json() == {"greeting": "Hello World!"}
 
 
 def test_prediction_good_payload():
