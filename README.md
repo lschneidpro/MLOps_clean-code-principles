@@ -24,6 +24,7 @@ response = requests.post(url, headers=headers, data=data)
 pred = response.json()
 ```
 ## Ideas for improvement
+- Re-organize each script to work as a class.
 - Use codecov or equivalent to measure the test coverage.
 - Implement FastAPI’s advanced features such as authentication.
 - Create a front end for the API.
