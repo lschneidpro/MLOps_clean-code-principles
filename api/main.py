@@ -28,47 +28,51 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
     if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
-    
+
 app = FastAPI()
+
 
 @app.on_event("startup")
 def load_artifacts():
     global model
     global encoder
     global lb
-    model = load('./model/model.joblib')
-    encoder = load('./model/encoder.joblib')
-    lb = load('./model/lb.joblib')
+    model = load("./model/model.joblib")
+    encoder = load("./model/encoder.joblib")
+    lb = load("./model/lb.joblib")
+
 
 @app.get("/")
 async def say_hello():
     return {"greeting": "Hello World!"}
 
+
 @app.post("/predict")
 async def predict(payload: PredictPayload) -> Dict:
-      
+
     data = pd.DataFrame(
         {
-            'workclass':payload.workclass.value,
-            'education':payload.education.value,
-            'marital-status':payload.marital_status.value,
-            'occupation':payload.occupation.value,
-            'relationship':payload.relationship.value,
-            'race':payload.race.value,
-            'sex':payload.sex.value,
-            'native-country':payload.native_country.value,
+            "workclass": payload.workclass.value,
+            "education": payload.education.value,
+            "marital-status": payload.marital_status.value,
+            "occupation": payload.occupation.value,
+            "relationship": payload.relationship.value,
+            "race": payload.race.value,
+            "sex": payload.sex.value,
+            "native-country": payload.native_country.value,
         },
-        index=[0]
-        )
+        index=[0],
+    )
     X, _, _, _ = process_data(
-        data, categorical_features=cat_features, label=None, training=False,
-        encoder = encoder, lb=lb
-        )
+        data,
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb,
+    )
     preds = inference(model, X)
     label = lb.inverse_transform(preds)[0]
-    
-    response = {"prediction": 
-                {"salary":label
-                 }
-                }
+
+    response = {"prediction": {"salary": label}}
     return response
