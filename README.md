@@ -22,3 +22,7 @@ data = '{ "workclass": "State-gov", "education": "Bachelors", "marital-status": 
 response = requests.post(url, headers=headers, data=data)
 pred = response.json()
 ```
+## Ideas for improvement
+- Use codecov or equivalent to measure the test coverage.
+- Implement FastAPI’s advanced features such as authentication.
+- Create a front end for the API.
